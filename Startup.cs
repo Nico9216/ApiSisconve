@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -46,7 +47,13 @@ namespace Sisconve
                     ValidateAudience = false
                 };
             });
-
+            services.Configure<FormOptions>(options =>
+            {
+                options.ValueLengthLimit = int.MaxValue;
+                options.MultipartBodyLengthLimit = int.MaxValue; // if don't set 
+                                                                 //default value is: 128 MB
+                options.MultipartHeadersLengthLimit = int.MaxValue;
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -83,5 +90,10 @@ namespace Sisconve
                 endpoints.MapControllers();
             });
         }
+
+
+
+        
+
     }
 }

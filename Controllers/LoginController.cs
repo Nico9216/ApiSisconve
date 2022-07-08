@@ -25,12 +25,12 @@ namespace Sisconve.Controllers
             this.per = _per;
         }
         [HttpPost]
-        public async Task<IActionResult> Post([FromQuery] string email, [FromQuery] string pass)
+        public async Task<IActionResult> Post([FromQuery] string ci, [FromQuery] string pass)
         {
             try
             {
                 
-                Usuario usuario = await per.Login(email, pass);
+                Usuario usuario = await per.Login(ci, pass);
 
                 if (usuario != null)
                 {

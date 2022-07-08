@@ -5637,11 +5637,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nbentos\\Desktop\\Sisconve\\Sisconve.csproj",
+      "projectUniqueName": "C:\\Nico\\ApiSisconve\\Sisconve.csproj",
       "projectName": "Sisconve",
-      "projectPath": "C:\\Users\\nbentos\\Desktop\\Sisconve\\Sisconve.csproj",
+      "projectPath": "C:\\Nico\\ApiSisconve\\Sisconve.csproj",
       "packagesPath": "C:\\Users\\nbentos\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nbentos\\Desktop\\Sisconve\\obj\\",
+      "outputPath": "C:\\Nico\\ApiSisconve\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\nbentos\\AppData\\Roaming\\NuGet\\NuGet.Config",

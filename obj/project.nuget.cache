@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uCBxsPrEl9iEcGD1D+uVlEYmkPi9xejXiWE/A/jxIQktd1jgm0LZUYGOLSOpoYN6bNa80sXuYWTX2zMc+pBa9g==",
+  "dgSpecHash": "B1u2DAScdbMG502oFvzbafk+XvrVb2F5pttuOnzoXvCO6SbLNcIxEq1+PEshgO2R5plkuwLg2RcjzSicOz6Btg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nbentos\\Desktop\\Sisconve\\Sisconve.csproj",
+  "projectFilePath": "C:\\Nico\\ApiSisconve\\Sisconve.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nbentos\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\nbentos\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.16\\microsoft.aspnetcore.authentication.jwtbearer.5.0.16.nupkg.sha512",
