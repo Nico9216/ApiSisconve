@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,12 @@ namespace Sisconve.Controllers
         {
             try
             {
+                using var workbook = new XLWorkbook(files.OpenReadStream());
+                var ws = workbook.Worksheet(1);
+                var data = ws.Cell(1,1).GetValue<string>();
+                var data2 = ws.Cell(2,1).GetValue<string>();
+                var data3 = ws.Cell(3,1).GetValue<string>();
+                
                 string test = "testing";
 
                 return Ok("Funciono");
