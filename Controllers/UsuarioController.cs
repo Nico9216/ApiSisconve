@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Sisconve.Models;
+using Sisconve.Persistencia;
+using Sisconve.Persistencia.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Sisconve.Controllers
@@ -13,27 +18,12 @@ namespace Sisconve.Controllers
     public class UsuarioController : Controller
     {
         private readonly IConfiguration config;
-        public UsuarioController(IConfiguration _config)
+        private readonly IPersistenciaOrden per;
+        public UsuarioController(IConfiguration _config, PersistenciaOrden _per)
         {
+            this.per = _per;
             config = _config;
         }
         
-        [HttpPost]
-        [RequestFormLimits(ValueLengthLimit = 100_000_000, MultipartBodyLengthLimit = 100_000_000)]
-        public  IActionResult Post([FromForm] IFormFile files)
-        {
-            try
-            {
-                string test = "testing";
-
-                return Ok("Funciono");
-
-               
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
     }
 }

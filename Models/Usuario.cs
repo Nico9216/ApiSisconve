@@ -7,6 +7,7 @@ namespace Sisconve.Models
 {
     public partial class Usuario
     {
+        public int UsuarioId { get; set; }
         public string UsuarioCi { get; set; }
         public string UsuarioNombres { get; set; }
         public string UsuarioApellidos { get; set; }
