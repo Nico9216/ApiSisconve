@@ -51,10 +51,12 @@ namespace Sisconve.Persistencia
             {
                 try
                 {
+                    DateTime fechaIni=Convert.ToDateTime(fechaDesde);
+                    DateTime fechaFin=Convert.ToDateTime(fechaHasta);   
                     List<ResponseOrden> ordenes = new List<ResponseOrden>();
-                    if (tipo == "Para Asignar")
+                    if (tipo == "Todos")
                     {
-                        ordenes = await _context.Ordens.Where(o => o.OrdenEstado == "Para Asignar").Select(o=> new ResponseOrden
+                        ordenes = await _context.Ordens.Where(o =>  o.OrdenFechaIngreso >= fechaIni && o.OrdenFechaIngreso <=fechaFin).Select(o=> new ResponseOrden
                         {
                             OrdenId = o.OrdenId,
                             OrdenNumero = o.OrdenNumero,
@@ -72,6 +74,29 @@ namespace Sisconve.Persistencia
                             OrdenFuncionarioId=o.OrdenFuncionarioId,
                             OrdenFuncionarioNombre= o.OrdenFuncionarioNombre,
                             OrdenFuncionarioApellido=o.OrdenFuncionarioApellido
+                        }).ToListAsync();
+                    }
+                    else
+                    {
+                        //&& o.OrdenFechaIngreso >= fechaIni && o.OrdenFechaIngreso <= fechaFin
+                        ordenes = await _context.Ordens.Where(o => o.OrdenEstado == tipo ).Select(o => new ResponseOrden
+                        {
+                            OrdenId = o.OrdenId,
+                            OrdenNumero = o.OrdenNumero,
+                            OrdenFechaIngreso = o.OrdenFechaIngreso,
+                            OrdenUsuarioNombre = o.OrdenUsuarioNombre,
+                            OrdenFechaInicioCoordinacion = o.OrdenFechaInicioCoordinacion,
+                            OrdenFechaFinCoordinacion = o.OrdenFechaFinCoordinacion,
+                            OrdenFechaFinalizacion = o.OrdenFechaFinalizacion,
+                            OrdenMovil = o.OrdenMovil,
+                            OrdenLugar = o.OrdenLugar,
+                            OrdenEstado = o.OrdenEstado,
+                            OrdenComentario = o.OrdenComentario,
+                            OrdenEmpresaId = o.OrdenEmpresaId,
+                            OrdenEmpresaNombre = o.OrdenEmpresaNombre,
+                            OrdenFuncionarioId = o.OrdenFuncionarioId,
+                            OrdenFuncionarioNombre = o.OrdenFuncionarioNombre,
+                            OrdenFuncionarioApellido = o.OrdenFuncionarioApellido
                         }).ToListAsync();
                     }
 

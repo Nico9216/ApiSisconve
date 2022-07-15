@@ -9,6 +9,8 @@ using Sisconve.Persistencia;
 using Sisconve.Persistencia.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sisconve.Controllers
@@ -87,14 +89,92 @@ namespace Sisconve.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+
         public async Task<IActionResult> Get(string tipo, string fechaDesde, string fechaHasta)
         {
             try {
+               
                 List<ResponseOrden> ordenes = await per.ListarOrdenes(tipo, fechaDesde, fechaHasta);
                 return Ok(ordenes);
             }
             catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+        [HttpPost("{ordenes}")]
+
+        public IActionResult Get(List<ResponseOrden> ordenes)
+        {
+            try
+            {
+                using (var workbook = new XLWorkbook())
+                {
+                    var worksheet = workbook.Worksheets.Add("ordenes");
+                    var currentRow = 1;
+
+                    #region Header
+                    worksheet.Cell(currentRow, 1).Value = "Número";
+                    worksheet.Cell(currentRow, 2).Value = "Fecha Ingreso";
+                    worksheet.Cell(currentRow, 3).Value = "Usuario";
+                    worksheet.Cell(currentRow, 4).Value = "Fec. Ini Coord";
+                    worksheet.Cell(currentRow, 5).Value = "Fec. Fin Coord";
+                    worksheet.Cell(currentRow, 6).Value = "Fecha Finalización";
+                    worksheet.Cell(currentRow, 7).Value = "Móvil";
+                    worksheet.Cell(currentRow, 8).Value = "Lugar";
+                    worksheet.Cell(currentRow, 9).Value = "Comentario";
+                    worksheet.Cell(currentRow, 10).Value = "Empresa";
+                    worksheet.Cell(currentRow, 11).Value = "Funcionario";
+                    #endregion
+
+                    #region Body
+                    ordenes.ForEach(o =>
+                    {
+                        currentRow++;
+                        worksheet.Cell(currentRow, 1).Value = o.OrdenNumero.ToString();
+                        worksheet.Cell(currentRow, 2).Value = o.OrdenFechaIngreso?.ToString("dd/MM/yyyy HH:mm");
+                        worksheet.Cell(currentRow, 3).Value = o.OrdenUsuarioNombre;
+                        worksheet.Cell(currentRow, 4).Value = o.OrdenFechaInicioCoordinacion?.ToString("dd/MM/yyyy");
+                        worksheet.Cell(currentRow, 5).Value = o.OrdenFechaFinCoordinacion?.ToString("dd/MM/yyyy");
+                        worksheet.Cell(currentRow, 6).Value = o.OrdenFechaFinalizacion?.ToString("dd/MM/yyyy HH:mm");
+                        worksheet.Cell(currentRow, 7).Value = o.OrdenMovil;
+                        worksheet.Cell(currentRow, 8).Value = o.OrdenLugar;
+                        worksheet.Cell(currentRow, 9).Value = o.OrdenComentario;
+                        worksheet.Cell(currentRow, 10).Value = o.OrdenEmpresaNombre;
+                        worksheet.Cell(currentRow, 11).Value = o.OrdenFuncionarioNombre + " " + o.OrdenFuncionarioApellido;
+                        if (currentRow % 2 == 1)
+                        {
+                            IXLRange range = worksheet.Range(worksheet.Cell(currentRow, 1).Address, worksheet.Cell(currentRow, 11).Address); //Las celdas del Header
+                            range.Style.Fill.SetBackgroundColor(XLColor.LightBlue);
+                        }
+
+                    });
+                    #endregion
+
+                    // Selecciono un rango de celdas al cual aplicar estilos
+                    IXLRange range = worksheet.Range(worksheet.Cell(1, 1).Address, worksheet.Cell(1, 25).Address); //Las celdas del Header
+
+                    range.Style.Border.OutsideBorder = XLBorderStyleValues.Medium; //Borde
+                    range.Style.Font.SetBold(true); //Bold
+                    range.Style.Font.SetFontColor(XLColor.White);
+                    range.Style.Fill.SetBackgroundColor(XLColor.Red); //Backgroundcolor
+                    worksheet.RangeUsed().SetAutoFilter(); //Aplica filtro a cada columna
+                    worksheet.Columns().AdjustToContents();
+                    worksheet.Columns().Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                    using (var stream = new MemoryStream())
+                    {
+                        workbook.SaveAs(stream);
+                        var content = stream.ToArray();
+
+                        String file = Convert.ToBase64String(content);
+                        return Ok(file);
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

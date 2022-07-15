@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Sisconve.Models;
+using Sisconve.Models.Response;
 using Sisconve.Persistencia;
 using Sisconve.Persistencia.Interfaces;
 using System;
@@ -51,7 +52,11 @@ namespace Sisconve.Controllers
                     var createdToken = tokenHandler.CreateToken(tokenDescriptor);
 
                     string bearer_token = tokenHandler.WriteToken(createdToken);
-                    return Ok(bearer_token);
+                    ResponseToken response=new ResponseToken();
+                    response.Nombre = usuario.UsuarioNombres;
+                    response.Token = bearer_token;
+
+                    return Ok(response);
                 }
                 else
                 {
