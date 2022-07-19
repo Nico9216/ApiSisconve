@@ -12,8 +12,8 @@ GO
 CREATE DATABASE Sisconve
 ON(
 	name = Nada,
-	filename = 'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\Sisconve.mdf'
-	--filename = 'C:\Sisconve.mdf'
+	--filename = 'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\Sisconve.mdf'
+	filename = 'C:\Sisconve.mdf'
   )
 GO
 
@@ -68,6 +68,6 @@ CREATE TABLE Orden(
  ordenFuncionarioApellido VARCHAR(50) NULL
 )
 
-INSERT INTO Usuario VALUES('49260752','Nicol·s','Barreto','nbarreto@acu.com.uy','1234',0)
+INSERT INTO Usuario VALUES('49260752','Nicol√°s','Barreto','nbarreto@acu.com.uy','1234',0)
 
 select * from Orden

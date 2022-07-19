@@ -13,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using Sisconve.Persistencia;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -66,6 +67,7 @@ namespace Sisconve
             
             services.AddSingleton<PersistenciaUsuario>();
             services.AddSingleton<PersistenciaOrden>();
+            services.AddSingleton<PersistenciaEmpresa>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +81,10 @@ namespace Sisconve
             }
             app.UseCors("PermitirTodo");
             app.UseHttpsRedirection();
+
+            var cultureInfo = new CultureInfo("es-ES");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
             app.UseRouting();
 

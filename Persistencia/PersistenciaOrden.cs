@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using Sisconve.Models.Response;
+using Sisconve.Utilidades;
 
 namespace Sisconve.Persistencia
 {
