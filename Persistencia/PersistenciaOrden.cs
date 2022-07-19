@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using Sisconve.Models.Response;
-using Sisconve.Utilidades;
+
 
 namespace Sisconve.Persistencia
 {
@@ -104,6 +104,54 @@ namespace Sisconve.Persistencia
                     return ordenes;
                 }
                 catch(Exception ex)
+                {
+                    throw new ApplicationException(ex.Message);
+                }
+            }
+        }
+
+        public async Task<List<ResponseOrden>> AsignarOrdenes(List<int> ordenes, int idEMpresa)
+        {
+            using (var _context = new SisconveContext())
+            {
+                try
+                {
+
+                    List<ResponseOrden> ordenesLista = new List<ResponseOrden>();
+
+                    foreach(var ordenId in ordenes)
+                    {
+                        Orden orden = new Orden();
+                        orden= await _context.Ordens.Where(o => o.OrdenId == ordenId).FirstOrDefaultAsync();
+                        orden.OrdenEstado = "Asignado";
+                         _context.Ordens.Update(orden);
+                        ResponseOrden ordenResponse = new ResponseOrden
+                        {
+                            OrdenId = orden.OrdenId,
+                            OrdenNumero = orden.OrdenNumero,
+                            OrdenFechaIngreso = orden.OrdenFechaIngreso,
+                            OrdenUsuarioNombre = orden.OrdenUsuarioNombre,
+                            OrdenFechaInicioCoordinacion = orden.OrdenFechaInicioCoordinacion,
+                            OrdenFechaFinCoordinacion = orden.OrdenFechaFinCoordinacion,
+                            OrdenFechaFinalizacion = orden.OrdenFechaFinalizacion,
+                            OrdenMovil = orden.OrdenMovil,
+                            OrdenLugar = orden.OrdenLugar,
+                            OrdenEstado = orden.OrdenEstado,
+                            OrdenComentario = orden.OrdenComentario,
+                            OrdenEmpresaId = orden.OrdenEmpresaId,
+                            OrdenEmpresaNombre = orden.OrdenEmpresaNombre,
+                            OrdenFuncionarioId = orden.OrdenFuncionarioId,
+                            OrdenFuncionarioNombre = orden.OrdenFuncionarioNombre,
+                            OrdenFuncionarioApellido = orden.OrdenFuncionarioApellido
+                        };
+                        ordenesLista.Add(ordenResponse);
+                        await _context.SaveChangesAsync();
+
+                    }
+
+                    return ordenesLista;
+                }
+                catch (Exception ex)
                 {
                     throw new ApplicationException(ex.Message);
                 }
