@@ -42,7 +42,10 @@ namespace Sisconve.Models
 
                 entity.Property(e => e.EmpresaId).HasColumnName("empresaId");
 
-                entity.Property(e => e.EmpresaCantServDiario).HasColumnName("empresaCantServDiario");
+                entity.Property(e => e.EmpresaCantEmpleados).HasColumnName("empresaCantEmpleados");
+                
+                entity.Property(e => e.EmpresaHorarioInicio).HasColumnName("empresaHorarioInicio");
+                entity.Property(e => e.EmpresaHorarioFin).HasColumnName("empresaHorarioFin");
 
                 entity.Property(e => e.EmpresaNombre)
                     .IsRequired()

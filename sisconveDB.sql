@@ -12,8 +12,8 @@ GO
 CREATE DATABASE Sisconve
 ON(
 	name = Nada,
-	--filename = 'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\Sisconve.mdf'
-	filename = 'C:\Sisconve.mdf'
+	filename = 'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\Sisconve.mdf'
+	--filename = 'C:\Sisconve.mdf'
   )
 GO
 
@@ -36,7 +36,9 @@ CREATE TABLE Usuario(
 CREATE TABLE Empresa(
 	empresaId INT Identity(1,1) PRIMARY KEY,
 	empresaNombre VARCHAR(50) NOT NULL,
-	empresaCantServDiario INT NOT NULL
+	empresaCantEmpleados INT NULL,
+	empresaHorarioInicio INT NULL,
+	empresaHorarioFin INT NULL,
 )
 
 CREATE TABLE Funcionario(

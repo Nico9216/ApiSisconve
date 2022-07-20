@@ -132,17 +132,17 @@ namespace Sisconve.Controllers
                     ordenes.ForEach(o =>
                     {
                         currentRow++;
-                        worksheet.Cell(currentRow, 1).Value = o.OrdenNumero.ToString();
-                        worksheet.Cell(currentRow, 2).Value = o.OrdenFechaIngreso?.ToString("dd/MM/yyyy HH:mm");
-                        worksheet.Cell(currentRow, 3).Value = o.OrdenUsuarioNombre;
-                        worksheet.Cell(currentRow, 4).Value = o.OrdenFechaInicioCoordinacion?.ToString("dd/MM/yyyy");
-                        worksheet.Cell(currentRow, 5).Value = o.OrdenFechaFinCoordinacion?.ToString("dd/MM/yyyy");
-                        worksheet.Cell(currentRow, 6).Value = o.OrdenFechaFinalizacion?.ToString("dd/MM/yyyy HH:mm");
-                        worksheet.Cell(currentRow, 7).Value = o.OrdenMovil;
-                        worksheet.Cell(currentRow, 8).Value = o.OrdenLugar;
-                        worksheet.Cell(currentRow, 9).Value = o.OrdenComentario;
-                        worksheet.Cell(currentRow, 10).Value = o.OrdenEmpresaNombre;
-                        worksheet.Cell(currentRow, 11).Value = o.OrdenFuncionarioNombre + " " + o.OrdenFuncionarioApellido;
+                        worksheet.Cell(currentRow, 1).Value = o.ordenNumero.ToString();
+                        worksheet.Cell(currentRow, 2).Value = o.ordenFechaIngreso?.ToString("dd/MM/yyyy HH:mm");
+                        worksheet.Cell(currentRow, 3).Value = o.ordenUsuarioNombre;
+                        worksheet.Cell(currentRow, 4).Value = o.ordenFechaInicioCoordinacion?.ToString("dd/MM/yyyy");
+                        worksheet.Cell(currentRow, 5).Value = o.ordenFechaFinCoordinacion?.ToString("dd/MM/yyyy");
+                        worksheet.Cell(currentRow, 6).Value = o.ordenFechaFinalizacion?.ToString("dd/MM/yyyy HH:mm");
+                        worksheet.Cell(currentRow, 7).Value = o.ordenMovil;
+                        worksheet.Cell(currentRow, 8).Value = o.ordenLugar;
+                        worksheet.Cell(currentRow, 9).Value = o.ordenComentario;
+                        worksheet.Cell(currentRow, 10).Value = o.ordenEmpresaNombre;
+                        worksheet.Cell(currentRow, 11).Value = o.ordenFuncionarioNombre + " " + o.ordenFuncionarioApellido;
                         if (currentRow % 2 == 1)
                         {
                             IXLRange range = worksheet.Range(worksheet.Cell(currentRow, 1).Address, worksheet.Cell(currentRow, 11).Address); //Las celdas del Header

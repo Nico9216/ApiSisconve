@@ -15,7 +15,9 @@ namespace Sisconve.Models
 
         public int EmpresaId { get; set; }
         public string EmpresaNombre { get; set; }
-        public int EmpresaCantServDiario { get; set; }
+        public int? EmpresaCantEmpleados { get; set; }
+        public int? EmpresaHorarioInicio { get; set; }
+        public int? EmpresaHorarioFin { get; set; }
 
         public virtual ICollection<Funcionario> Funcionarios { get; set; }
         public virtual ICollection<Orden> Ordens { get; set; }

@@ -2,8 +2,11 @@
 {
     public class ResponseEmpresa
     {
-        public int EmpresaId { get; set; }
-        public string EmpresaNombre { get; set; }
-        public int EmpresaCantServDiario { get; set; }
+        public int empresaId { get; set; }
+        public string empresaNombre { get; set; }
+        public int? empresaCantEmpleados { get; set; }
+        public int? empresaHorarioInicio { get; set; }
+        public int? empresaHorarioFin { get; set; }
+
     }
 }

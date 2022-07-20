@@ -59,22 +59,22 @@ namespace Sisconve.Persistencia
                     {
                         ordenes = await _context.Ordens.Where(o =>  o.OrdenFechaIngreso >= fechaIni && o.OrdenFechaIngreso <=fechaFin).Select(o=> new ResponseOrden
                         {
-                            OrdenId = o.OrdenId,
-                            OrdenNumero = o.OrdenNumero,
-                            OrdenFechaIngreso=o.OrdenFechaIngreso,
-                            OrdenUsuarioNombre=o.OrdenUsuarioNombre,
-                            OrdenFechaInicioCoordinacion=o.OrdenFechaInicioCoordinacion,
-                            OrdenFechaFinCoordinacion=o.OrdenFechaFinCoordinacion,
-                            OrdenFechaFinalizacion=o.OrdenFechaFinalizacion,
-                            OrdenMovil=o.OrdenMovil,
-                            OrdenLugar=o.OrdenLugar,
-                            OrdenEstado=o.OrdenEstado,
-                            OrdenComentario=o.OrdenComentario,
-                            OrdenEmpresaId=o.OrdenEmpresaId,
-                            OrdenEmpresaNombre=o.OrdenEmpresaNombre,
-                            OrdenFuncionarioId=o.OrdenFuncionarioId,
-                            OrdenFuncionarioNombre= o.OrdenFuncionarioNombre,
-                            OrdenFuncionarioApellido=o.OrdenFuncionarioApellido
+                            ordenId = o.OrdenId,
+                            ordenNumero = o.OrdenNumero,
+                            ordenFechaIngreso=o.OrdenFechaIngreso,
+                            ordenUsuarioNombre=o.OrdenUsuarioNombre,
+                            ordenFechaInicioCoordinacion=o.OrdenFechaInicioCoordinacion,
+                            ordenFechaFinCoordinacion=o.OrdenFechaFinCoordinacion,
+                            ordenFechaFinalizacion=o.OrdenFechaFinalizacion,
+                            ordenMovil=o.OrdenMovil,
+                            ordenLugar=o.OrdenLugar,
+                            ordenEstado=o.OrdenEstado,
+                            ordenComentario=o.OrdenComentario,
+                            ordenEmpresaId=o.OrdenEmpresaId,
+                            ordenEmpresaNombre=o.OrdenEmpresaNombre,
+                            ordenFuncionarioId=o.OrdenFuncionarioId,
+                            ordenFuncionarioNombre= o.OrdenFuncionarioNombre,
+                            ordenFuncionarioApellido=o.OrdenFuncionarioApellido
                         }).ToListAsync();
                     }
                     else
@@ -82,22 +82,22 @@ namespace Sisconve.Persistencia
                         //&& o.OrdenFechaIngreso >= fechaIni && o.OrdenFechaIngreso <= fechaFin
                         ordenes = await _context.Ordens.Where(o => o.OrdenEstado == tipo ).Select(o => new ResponseOrden
                         {
-                            OrdenId = o.OrdenId,
-                            OrdenNumero = o.OrdenNumero,
-                            OrdenFechaIngreso = o.OrdenFechaIngreso,
-                            OrdenUsuarioNombre = o.OrdenUsuarioNombre,
-                            OrdenFechaInicioCoordinacion = o.OrdenFechaInicioCoordinacion,
-                            OrdenFechaFinCoordinacion = o.OrdenFechaFinCoordinacion,
-                            OrdenFechaFinalizacion = o.OrdenFechaFinalizacion,
-                            OrdenMovil = o.OrdenMovil,
-                            OrdenLugar = o.OrdenLugar,
-                            OrdenEstado = o.OrdenEstado,
-                            OrdenComentario = o.OrdenComentario,
-                            OrdenEmpresaId = o.OrdenEmpresaId,
-                            OrdenEmpresaNombre = o.OrdenEmpresaNombre,
-                            OrdenFuncionarioId = o.OrdenFuncionarioId,
-                            OrdenFuncionarioNombre = o.OrdenFuncionarioNombre,
-                            OrdenFuncionarioApellido = o.OrdenFuncionarioApellido
+                            ordenId = o.OrdenId,
+                            ordenNumero = o.OrdenNumero,
+                            ordenFechaIngreso = o.OrdenFechaIngreso,
+                            ordenUsuarioNombre = o.OrdenUsuarioNombre,
+                            ordenFechaInicioCoordinacion = o.OrdenFechaInicioCoordinacion,
+                            ordenFechaFinCoordinacion = o.OrdenFechaFinCoordinacion,
+                            ordenFechaFinalizacion = o.OrdenFechaFinalizacion,
+                            ordenMovil = o.OrdenMovil,
+                            ordenLugar = o.OrdenLugar,
+                            ordenEstado = o.OrdenEstado,
+                            ordenComentario = o.OrdenComentario,
+                            ordenEmpresaId = o.OrdenEmpresaId,
+                            ordenEmpresaNombre = o.OrdenEmpresaNombre,
+                            ordenFuncionarioId = o.OrdenFuncionarioId,
+                            ordenFuncionarioNombre = o.OrdenFuncionarioNombre,
+                            ordenFuncionarioApellido = o.OrdenFuncionarioApellido
                         }).ToListAsync();
                     }
 
@@ -127,22 +127,22 @@ namespace Sisconve.Persistencia
                          _context.Ordens.Update(orden);
                         ResponseOrden ordenResponse = new ResponseOrden
                         {
-                            OrdenId = orden.OrdenId,
-                            OrdenNumero = orden.OrdenNumero,
-                            OrdenFechaIngreso = orden.OrdenFechaIngreso,
-                            OrdenUsuarioNombre = orden.OrdenUsuarioNombre,
-                            OrdenFechaInicioCoordinacion = orden.OrdenFechaInicioCoordinacion,
-                            OrdenFechaFinCoordinacion = orden.OrdenFechaFinCoordinacion,
-                            OrdenFechaFinalizacion = orden.OrdenFechaFinalizacion,
-                            OrdenMovil = orden.OrdenMovil,
-                            OrdenLugar = orden.OrdenLugar,
-                            OrdenEstado = orden.OrdenEstado,
-                            OrdenComentario = orden.OrdenComentario,
-                            OrdenEmpresaId = orden.OrdenEmpresaId,
-                            OrdenEmpresaNombre = orden.OrdenEmpresaNombre,
-                            OrdenFuncionarioId = orden.OrdenFuncionarioId,
-                            OrdenFuncionarioNombre = orden.OrdenFuncionarioNombre,
-                            OrdenFuncionarioApellido = orden.OrdenFuncionarioApellido
+                            ordenId = orden.OrdenId,
+                            ordenNumero = orden.OrdenNumero,
+                            ordenFechaIngreso = orden.OrdenFechaIngreso,
+                            ordenUsuarioNombre = orden.OrdenUsuarioNombre,
+                            ordenFechaInicioCoordinacion = orden.OrdenFechaInicioCoordinacion,
+                            ordenFechaFinCoordinacion = orden.OrdenFechaFinCoordinacion,
+                            ordenFechaFinalizacion = orden.OrdenFechaFinalizacion,
+                            ordenMovil = orden.OrdenMovil,
+                            ordenLugar = orden.OrdenLugar,
+                            ordenEstado = orden.OrdenEstado,
+                            ordenComentario = orden.OrdenComentario,
+                            ordenEmpresaId = orden.OrdenEmpresaId,
+                            ordenEmpresaNombre = orden.OrdenEmpresaNombre,
+                            ordenFuncionarioId = orden.OrdenFuncionarioId,
+                            ordenFuncionarioNombre = orden.OrdenFuncionarioNombre,
+                            ordenFuncionarioApellido = orden.OrdenFuncionarioApellido
                         };
                         ordenesLista.Add(ordenResponse);
                         await _context.SaveChangesAsync();
