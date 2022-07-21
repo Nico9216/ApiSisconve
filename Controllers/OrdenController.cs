@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-
+using Aspose.Cells;
 namespace Sisconve.Controllers
 {
     [Route("api/[controller]")]
@@ -34,7 +34,27 @@ namespace Sisconve.Controllers
         {
             try
             {
-                var workbook = new XLWorkbook(files.OpenReadStream());
+                //El archivo viene en xls(formato antiguo de excel) el cual no lo puede leer XLWorkbook() por lo tanto
+                //lo convierto a xlsx con Apose.Cells
+                var fileName = files.FileName;
+                string ext = Path.GetExtension(fileName);
+                XLWorkbook workbook;
+                if (ext == ".xls")
+                {
+                    var workbook2 = new Workbook(files.OpenReadStream());
+                    workbook2.Save("reporteOrdenes.xlsx", SaveFormat.Xlsx);
+
+                    workbook = new XLWorkbook("reporteOrdenes.xlsx");
+                }
+                else if (ext==".xlsx")
+                {
+                    workbook = new XLWorkbook(files.OpenReadStream());
+                }
+                else
+                {
+                    throw new Exception("Se permite unicamente archivos .xls y .xlsx");
+                }
+
                 var ws = workbook.Worksheet(1);
                 int row = 2;
                 bool finished = false;
@@ -73,14 +93,15 @@ namespace Sisconve.Controllers
                     string ordenInstalaTagreader = ws.Cell(row, 28).GetValue<string>();
                     string ordenInstalaInmovilizador = ws.Cell(row, 29).GetValue<string>();
                     string ordenLugar = ws.Cell(row, 30).GetValue<string>();
-                    string ordenZonaGira = ws.Cell(row, 31).GetValue<string>();
-                    string ordenNroParte = ws.Cell(row, 32).GetValue<string>();
-                    string ordenCapacidadTanqueMim = ws.Cell(row, 33).GetValue<string>();
-                    string ordenCapacidadTanqueMimtec = ws.Cell(row, 34).GetValue<string>();
-                    string ordenInstalaCa = ws.Cell(row, 35).GetValue<string>();
-                    string ordenPudoInstalarCs = ws.Cell(row, 36).GetValue<string>();
-                    string ordenInstalaMebiclick = ws.Cell(row, 37).GetValue<string>();
-                    string ordenEncendidoPorMotor = ws.Cell(row, 38).GetValue<string>();
+                    string ordenDescripcion = ws.Cell(row, 31).GetValue<string>();
+                    string ordenZonaGira = ws.Cell(row, 32).GetValue<string>();
+                    string ordenNroParte = ws.Cell(row, 33).GetValue<string>();
+                    string ordenCapacidadTanqueMim = ws.Cell(row, 34).GetValue<string>();
+                    string ordenCapacidadTanqueMimtec = ws.Cell(row, 35).GetValue<string>();
+                    string ordenInstalaCa = ws.Cell(row, 36).GetValue<string>();
+                    string ordenPudoInstalarCs = ws.Cell(row, 37).GetValue<string>();
+                    string ordenInstalaMebiclick = ws.Cell(row, 38).GetValue<string>();
+                    string ordenEncendidoPorMotor = ws.Cell(row, 39).GetValue<string>();
     
 
 
@@ -95,11 +116,12 @@ namespace Sisconve.Controllers
                         ordenObj.OrdenEstado=ordenEstado;
                         ordenObj.OrdenFechaInicioCoordinacion=Convert.ToDateTime(ordenFechaInicioCoordinacion);
                         ordenObj.OrdenFechaFinCoordinacion = Convert.ToDateTime(ordenFechaFinCoordinacion);
-                        ordenObj.OrdenFechaFinalizacion = Convert.ToDateTime(ordenFechaFinalizacion);
+                        if(ordenFechaFinalizacion != "") { ordenObj.OrdenFechaFinalizacion = Convert.ToDateTime(ordenFechaFinalizacion); }
+                        
                         ordenObj.OrdenUsuarioNombreFinalizo =ordenUsuarioNombreFinalizo;
                         ordenObj.OrdenTmpoTrabajoEnMdeo =ordenTmpoTrabajoEnMdeo;
                         ordenObj.OrdenTmpoTrabajoEnInterior =ordenTmpoTrabajoEnInterior;
-                        ordenObj.OrdenFechaPrimeraCarga = Convert.ToDateTime(ordenFechaPrimeraCarga);
+                        if (ordenFechaPrimeraCarga != ""){ordenObj.OrdenFechaPrimeraCarga = Convert.ToDateTime(ordenFechaPrimeraCarga);}
                         ordenObj.OrdenSerieDpl =ordenSerieDpl;
                         ordenObj.OrdenDeviceIdDpl =ordenDeviceIdDpl;
                         ordenObj.OrdenSerieDataPass =ordenSerieDataPass;
@@ -152,6 +174,7 @@ namespace Sisconve.Controllers
 
                         
                         ordenObj.OrdenLugar =ordenLugar;
+                        ordenObj.OrdenDescripcion = ordenDescripcion;
                         ordenObj.OrdenZonaGira =ordenZonaGira;
                         ordenObj.OrdenNroParte =ordenNroParte;
                         ordenObj.OrdenCapacidadTanqueMim =ordenCapacidadTanqueMim;

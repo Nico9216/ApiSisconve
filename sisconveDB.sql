@@ -83,6 +83,7 @@ CREATE TABLE Orden(
  ordenInstalaTAGReader BIT NOT NULL,
  ordenInstalaInmovilizador BIT NOT NULL,
  ordenLugar VARCHAR(20) NULL,
+ ordenDescripcion VARCHAR(50) NULL,
  ordenZonaGira VARCHAR(20) NULL,
  ordenNroParte VARCHAR(50) NULL,
  ordenCapacidadTanqueMIM VARCHAR(10) NULL,
@@ -95,7 +96,9 @@ CREATE TABLE Orden(
 
 )
 
+
+
 INSERT INTO Usuario VALUES('49260752','Nicolás','Barreto','nbarreto@acu.com.uy','1234',0)
 INSERT INTO Empresa VALUES('ACU',5,800,1800)
 INSERT INTO Empresa VALUES('ACUTEST',8,1000,1800)
-select * from Empresa
+select * from Orden

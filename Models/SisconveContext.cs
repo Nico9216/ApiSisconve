@@ -264,6 +264,10 @@ namespace Sisconve.Models
                     .HasMaxLength(20)
                     .IsUnicode(false)
                     .HasColumnName("ordenZonaGira");
+                entity.Property(e => e.OrdenDescripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenDescripcion");
             });
 
             modelBuilder.Entity<Usuario>(entity =>

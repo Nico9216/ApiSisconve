@@ -35,6 +35,7 @@ namespace Sisconve.Models.Response
         public bool ordenInstalaTagreader { get; set; }
         public bool ordenInstalaInmovilizador { get; set; }
         public string ordenLugar { get; set; }
+        public string ordenDescripcion { get; set; }
         public string ordenZonaGira { get; set; }
         public string ordenNroParte { get; set; }
         public string ordenCapacidadTanqueMim { get; set; }
