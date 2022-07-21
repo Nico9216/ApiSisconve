@@ -55,6 +55,7 @@ namespace Sisconve.Controllers
         }
 
         [HttpPut]
+        [AllowAnonymous]
         public async Task<IActionResult> Put(ResponseEmpresa empresa)
         {
             try

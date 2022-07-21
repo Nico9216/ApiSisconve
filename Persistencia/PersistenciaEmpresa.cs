@@ -48,7 +48,7 @@ namespace Sisconve.Persistencia
                 try
                 {
                     Empresa empresaContext = new Empresa();
-                    empresaContext.EmpresaId = empresa.empresaId;
+                   
                     empresaContext.EmpresaNombre = empresa.empresaNombre;
                     empresaContext.EmpresaCantEmpleados = empresa.empresaCantEmpleados;
                     empresaContext.EmpresaHorarioInicio = empresa.empresaHorarioInicio;
