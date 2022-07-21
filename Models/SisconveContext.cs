@@ -43,9 +43,10 @@ namespace Sisconve.Models
                 entity.Property(e => e.EmpresaId).HasColumnName("empresaId");
 
                 entity.Property(e => e.EmpresaCantEmpleados).HasColumnName("empresaCantEmpleados");
-                
-                entity.Property(e => e.EmpresaHorarioInicio).HasColumnName("empresaHorarioInicio");
+
                 entity.Property(e => e.EmpresaHorarioFin).HasColumnName("empresaHorarioFin");
+
+                entity.Property(e => e.EmpresaHorarioInicio).HasColumnName("empresaHorarioInicio");
 
                 entity.Property(e => e.EmpresaNombre)
                     .IsRequired()
@@ -100,17 +101,52 @@ namespace Sisconve.Models
 
                 entity.Property(e => e.OrdenId).HasColumnName("ordenId");
 
-                entity.Property(e => e.OrdenComentario)
-                    .HasMaxLength(1000)
+                entity.Property(e => e.OrdenBobina)
+                    .HasMaxLength(10)
                     .IsUnicode(false)
-                    .HasColumnName("ordenComentario");
+                    .HasColumnName("ordenBobina");
 
-                entity.Property(e => e.OrdenEmpresaId).HasColumnName("ordenEmpresaId");
+                entity.Property(e => e.OrdenCapacidadTanqueMim)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenCapacidadTanqueMIM");
 
-                entity.Property(e => e.OrdenEmpresaNombre)
+                entity.Property(e => e.OrdenCapacidadTanqueMimtec)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenCapacidadTanqueMIMTec");
+
+                entity.Property(e => e.OrdenCardId)
                     .HasMaxLength(50)
                     .IsUnicode(false)
-                    .HasColumnName("ordenEmpresaNombre");
+                    .HasColumnName("ordenCardId");
+
+                entity.Property(e => e.OrdenChip)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenChip");
+
+                entity.Property(e => e.OrdenComentarioFinales)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenComentarioFinales");
+
+                entity.Property(e => e.OrdenComentarioInicial)
+                    .HasMaxLength(500)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenComentarioInicial");
+
+                entity.Property(e => e.OrdenDeviceIdDpl)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenDeviceIdDPL");
+
+                entity.Property(e => e.OrdenDivision)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenDivision");
+
+                entity.Property(e => e.OrdenEncendidoPorMotor).HasColumnName("ordenEncendidoPorMotor");
 
                 entity.Property(e => e.OrdenEstado)
                     .HasMaxLength(50)
@@ -125,52 +161,109 @@ namespace Sisconve.Models
                     .HasColumnType("date")
                     .HasColumnName("ordenFechaFinalizacion");
 
-                entity.Property(e => e.OrdenFechaIngreso)
-                    .HasColumnType("datetime")
-                    .HasColumnName("ordenFechaIngreso");
-
                 entity.Property(e => e.OrdenFechaInicioCoordinacion)
                     .HasColumnType("date")
                     .HasColumnName("ordenFechaInicioCoordinacion");
 
-                entity.Property(e => e.OrdenFuncionarioId).HasColumnName("ordenFuncionarioId");
+                entity.Property(e => e.OrdenFechaPrimeraCarga)
+                    .HasColumnType("date")
+                    .HasColumnName("ordenFechaPrimeraCarga");
 
-                entity.Property(e => e.OrdenFuncionarioApellido)
-                    .HasMaxLength(50)
+                entity.Property(e => e.OrdenFlota)
+                    .HasMaxLength(100)
                     .IsUnicode(false)
-                    .HasColumnName("ordenFuncionarioApellido");
+                    .HasColumnName("ordenFlota");
 
-                entity.Property(e => e.OrdenFuncionarioNombre)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ordenFuncionarioNombre");
+                entity.Property(e => e.OrdenInstalaCa).HasColumnName("ordenInstalaCA");
+
+                entity.Property(e => e.OrdenInstalaDataPass).HasColumnName("ordenInstalaDataPass");
+
+                entity.Property(e => e.OrdenInstalaDpl).HasColumnName("ordenInstalaDPL");
+
+                entity.Property(e => e.OrdenInstalaInmovilizador).HasColumnName("ordenInstalaInmovilizador");
+
+                entity.Property(e => e.OrdenInstalaMebiclick).HasColumnName("ordenInstalaMebiclick");
+
+                entity.Property(e => e.OrdenInstalaTagreader).HasColumnName("ordenInstalaTAGReader");
 
                 entity.Property(e => e.OrdenLugar)
-                    .HasMaxLength(50)
+                    .HasMaxLength(20)
                     .IsUnicode(false)
                     .HasColumnName("ordenLugar");
 
-                entity.Property(e => e.OrdenMovil)
+                entity.Property(e => e.OrdenMacdataPass)
                     .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenMACDataPass");
+
+                entity.Property(e => e.OrdenMatricula)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenMatricula");
+
+                entity.Property(e => e.OrdenMovil)
+                    .HasMaxLength(10)
                     .IsUnicode(false)
                     .HasColumnName("ordenMovil");
 
-                entity.Property(e => e.OrdenNumero).HasColumnName("ordenNumero");
-
-                entity.Property(e => e.OrdenUsuarioNombre)
+                entity.Property(e => e.OrdenNombreOrganizacion)
                     .HasMaxLength(100)
                     .IsUnicode(false)
-                    .HasColumnName("ordenUsuarioNombre");
+                    .HasColumnName("ordenNombreOrganizacion");
 
-                entity.HasOne(d => d.OrdenEmpresa)
-                    .WithMany(p => p.Ordens)
-                    .HasForeignKey(d => d.OrdenEmpresaId)
-                    .HasConstraintName("FK__Orden__ordenEmpr__1273C1CD");
+                entity.Property(e => e.OrdenNroParte)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenNroParte");
 
-                entity.HasOne(d => d.OrdenFuncionarioNavigation)
-                    .WithMany(p => p.Ordens)
-                    .HasForeignKey(d => d.OrdenFuncionarioId)
-                    .HasConstraintName("FK__Orden__ordenFunc__1367E606");
+                entity.Property(e => e.OrdenNroTagreader)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenNroTAGReader");
+
+                entity.Property(e => e.OrdenNumero).HasColumnName("ordenNumero");
+
+                entity.Property(e => e.OrdenPudoInstalarCs).HasColumnName("ordenPudoInstalarCS");
+
+                entity.Property(e => e.OrdenSerieDataPass)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenSerieDataPass");
+
+                entity.Property(e => e.OrdenSerieDpl)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenSerieDPL");
+
+                entity.Property(e => e.OrdenSerieTagreader)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenSerieTAGReader");
+
+                entity.Property(e => e.OrdenTmpoTrabajoEnInterior)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenTmpoTrabajoEnInterior");
+
+                entity.Property(e => e.OrdenTmpoTrabajoEnMdeo)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenTmpoTrabajoEnMdeo");
+
+                entity.Property(e => e.OrdenTrazaOrden)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenTrazaOrden");
+
+                entity.Property(e => e.OrdenUsuarioNombreFinalizo)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenUsuarioNombreFinalizo");
+
+                entity.Property(e => e.OrdenZonaGira)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenZonaGira");
             });
 
             modelBuilder.Entity<Usuario>(entity =>

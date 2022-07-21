@@ -5766,19 +5766,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nicolas\\.nuget\\packages\\": {}
+    "C:\\Users\\nbentos\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nicolas\\Desktop\\Trabajo\\ApiSisconve\\Sisconve.csproj",
+      "projectUniqueName": "C:\\Nico\\ApiSisconve\\Sisconve.csproj",
       "projectName": "Sisconve",
-      "projectPath": "C:\\Users\\nicolas\\Desktop\\Trabajo\\ApiSisconve\\Sisconve.csproj",
-      "packagesPath": "C:\\Users\\nicolas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nicolas\\Desktop\\Trabajo\\ApiSisconve\\obj\\",
+      "projectPath": "C:\\Nico\\ApiSisconve\\Sisconve.csproj",
+      "packagesPath": "C:\\Users\\nbentos\\.nuget\\packages\\",
+      "outputPath": "C:\\Nico\\ApiSisconve\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\nicolas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nbentos\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5849,6 +5849,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.17, 5.0.17]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5857,7 +5863,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

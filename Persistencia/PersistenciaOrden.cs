@@ -57,24 +57,48 @@ namespace Sisconve.Persistencia
                     List<ResponseOrden> ordenes = new List<ResponseOrden>();
                     if (tipo == "Todos")
                     {
-                        ordenes = await _context.Ordens.Where(o =>  o.OrdenFechaIngreso >= fechaIni && o.OrdenFechaIngreso <=fechaFin).Select(o=> new ResponseOrden
+                        ordenes = await _context.Ordens.Where(o =>  o.OrdenFechaInicioCoordinacion >= fechaIni && o.OrdenFechaInicioCoordinacion <= fechaFin).Select(o=> new ResponseOrden
                         {
                             ordenId = o.OrdenId,
                             ordenNumero = o.OrdenNumero,
-                            ordenFechaIngreso=o.OrdenFechaIngreso,
-                            ordenUsuarioNombre=o.OrdenUsuarioNombre,
-                            ordenFechaInicioCoordinacion=o.OrdenFechaInicioCoordinacion,
-                            ordenFechaFinCoordinacion=o.OrdenFechaFinCoordinacion,
-                            ordenFechaFinalizacion=o.OrdenFechaFinalizacion,
-                            ordenMovil=o.OrdenMovil,
+                            ordenNombreOrganizacion = o.OrdenNombreOrganizacion,
+                            ordenMovil = o.OrdenMovil,
+                            ordenMatricula = o.OrdenMatricula,
+                            ordenEstado = o.OrdenEstado,
+                            ordenFechaInicioCoordinacion = o.OrdenFechaInicioCoordinacion,
+                            ordenFechaFinCoordinacion = o.OrdenFechaFinCoordinacion,
+                            ordenFechaFinalizacion = o.OrdenFechaFinalizacion,
+                            ordenUsuarioNombreFinalizo = o.OrdenUsuarioNombreFinalizo,
+                            ordenTmpoTrabajoEnMdeo = o.OrdenTmpoTrabajoEnMdeo,
+                            ordenTmpoTrabajoEnInterior = o.OrdenTmpoTrabajoEnInterior,
+                            ordenFechaPrimeraCarga = o.OrdenFechaPrimeraCarga,
+                            ordenSerieDpl = o.OrdenSerieDpl,
+                            ordenDeviceIdDpl = o.OrdenDeviceIdDpl,
+                            ordenSerieDataPass=o.OrdenSerieDataPass,
+                            ordenMacdataPass=o.OrdenMacdataPass,
+                            ordenSerieTagreader = o.OrdenSerieTagreader,
+                            ordenNroTagreader = o.OrdenNroTagreader,
+                            ordenChip=o.OrdenChip,
+                            ordenDivision=o.OrdenDivision,
+                            ordenFlota=o.OrdenFlota,
+                            ordenCardId=o.OrdenCardId,
+                            ordenBobina=o.OrdenBobina,
+                            ordenComentarioInicial=o.OrdenComentarioInicial,
+                            ordenTrazaOrden= o.OrdenTrazaOrden,
+                            ordenInstalaDpl=o.OrdenInstalaDpl,
+                            ordenInstalaDataPass=o.OrdenInstalaDataPass,
+                            ordenInstalaTagreader = o.OrdenInstalaTagreader,
+                            ordenInstalaInmovilizador=o.OrdenInstalaInmovilizador,
                             ordenLugar=o.OrdenLugar,
-                            ordenEstado=o.OrdenEstado,
-                            ordenComentario=o.OrdenComentario,
-                            ordenEmpresaId=o.OrdenEmpresaId,
-                            ordenEmpresaNombre=o.OrdenEmpresaNombre,
-                            ordenFuncionarioId=o.OrdenFuncionarioId,
-                            ordenFuncionarioNombre= o.OrdenFuncionarioNombre,
-                            ordenFuncionarioApellido=o.OrdenFuncionarioApellido
+                            ordenZonaGira=o.OrdenZonaGira,
+                            ordenNroParte=o.OrdenNroParte,
+                            ordenCapacidadTanqueMim=o.OrdenCapacidadTanqueMim,
+                            ordenCapacidadTanqueMimtec=o.OrdenCapacidadTanqueMimtec,
+                            ordenInstalaCa=o.OrdenInstalaCa,
+                            ordenPudoInstalarCs=o.OrdenPudoInstalarCs,
+                            ordenInstalaMebiclick=o.OrdenInstalaMebiclick,
+                            ordenEncendidoPorMotor=o.OrdenEncendidoPorMotor,
+                            ordenComentarioFinales=o.OrdenComentarioFinales
                         }).ToListAsync();
                     }
                     else
@@ -84,20 +108,44 @@ namespace Sisconve.Persistencia
                         {
                             ordenId = o.OrdenId,
                             ordenNumero = o.OrdenNumero,
-                            ordenFechaIngreso = o.OrdenFechaIngreso,
-                            ordenUsuarioNombre = o.OrdenUsuarioNombre,
+                            ordenNombreOrganizacion = o.OrdenNombreOrganizacion,
+                            ordenMovil = o.OrdenMovil,
+                            ordenMatricula = o.OrdenMatricula,
+                            ordenEstado = o.OrdenEstado,
                             ordenFechaInicioCoordinacion = o.OrdenFechaInicioCoordinacion,
                             ordenFechaFinCoordinacion = o.OrdenFechaFinCoordinacion,
                             ordenFechaFinalizacion = o.OrdenFechaFinalizacion,
-                            ordenMovil = o.OrdenMovil,
+                            ordenUsuarioNombreFinalizo = o.OrdenUsuarioNombreFinalizo,
+                            ordenTmpoTrabajoEnMdeo = o.OrdenTmpoTrabajoEnMdeo,
+                            ordenTmpoTrabajoEnInterior = o.OrdenTmpoTrabajoEnInterior,
+                            ordenFechaPrimeraCarga = o.OrdenFechaPrimeraCarga,
+                            ordenSerieDpl = o.OrdenSerieDpl,
+                            ordenDeviceIdDpl = o.OrdenDeviceIdDpl,
+                            ordenSerieDataPass = o.OrdenSerieDataPass,
+                            ordenMacdataPass = o.OrdenMacdataPass,
+                            ordenSerieTagreader = o.OrdenSerieTagreader,
+                            ordenNroTagreader = o.OrdenNroTagreader,
+                            ordenChip = o.OrdenChip,
+                            ordenDivision = o.OrdenDivision,
+                            ordenFlota = o.OrdenFlota,
+                            ordenCardId = o.OrdenCardId,
+                            ordenBobina = o.OrdenBobina,
+                            ordenComentarioInicial = o.OrdenComentarioInicial,
+                            ordenTrazaOrden = o.OrdenTrazaOrden,
+                            ordenInstalaDpl = o.OrdenInstalaDpl,
+                            ordenInstalaDataPass = o.OrdenInstalaDataPass,
+                            ordenInstalaTagreader = o.OrdenInstalaTagreader,
+                            ordenInstalaInmovilizador = o.OrdenInstalaInmovilizador,
                             ordenLugar = o.OrdenLugar,
-                            ordenEstado = o.OrdenEstado,
-                            ordenComentario = o.OrdenComentario,
-                            ordenEmpresaId = o.OrdenEmpresaId,
-                            ordenEmpresaNombre = o.OrdenEmpresaNombre,
-                            ordenFuncionarioId = o.OrdenFuncionarioId,
-                            ordenFuncionarioNombre = o.OrdenFuncionarioNombre,
-                            ordenFuncionarioApellido = o.OrdenFuncionarioApellido
+                            ordenZonaGira = o.OrdenZonaGira,
+                            ordenNroParte = o.OrdenNroParte,
+                            ordenCapacidadTanqueMim = o.OrdenCapacidadTanqueMim,
+                            ordenCapacidadTanqueMimtec = o.OrdenCapacidadTanqueMimtec,
+                            ordenInstalaCa = o.OrdenInstalaCa,
+                            ordenPudoInstalarCs = o.OrdenPudoInstalarCs,
+                            ordenInstalaMebiclick = o.OrdenInstalaMebiclick,
+                            ordenEncendidoPorMotor = o.OrdenEncendidoPorMotor,
+                            ordenComentarioFinales = o.OrdenComentarioFinales
                         }).ToListAsync();
                     }
 
@@ -121,28 +169,52 @@ namespace Sisconve.Persistencia
 
                     foreach(var ordenId in ordenes)
                     {
-                        Orden orden = new Orden();
-                        orden= await _context.Ordens.Where(o => o.OrdenId == ordenId).FirstOrDefaultAsync();
-                        orden.OrdenEstado = "Asignado";
-                         _context.Ordens.Update(orden);
+                        Orden o = new Orden();
+                        o= await _context.Ordens.Where(o => o.OrdenId == ordenId).FirstOrDefaultAsync();
+                        o.OrdenEstado = "Asignado";
+                         _context.Ordens.Update(o);
                         ResponseOrden ordenResponse = new ResponseOrden
                         {
-                            ordenId = orden.OrdenId,
-                            ordenNumero = orden.OrdenNumero,
-                            ordenFechaIngreso = orden.OrdenFechaIngreso,
-                            ordenUsuarioNombre = orden.OrdenUsuarioNombre,
-                            ordenFechaInicioCoordinacion = orden.OrdenFechaInicioCoordinacion,
-                            ordenFechaFinCoordinacion = orden.OrdenFechaFinCoordinacion,
-                            ordenFechaFinalizacion = orden.OrdenFechaFinalizacion,
-                            ordenMovil = orden.OrdenMovil,
-                            ordenLugar = orden.OrdenLugar,
-                            ordenEstado = orden.OrdenEstado,
-                            ordenComentario = orden.OrdenComentario,
-                            ordenEmpresaId = orden.OrdenEmpresaId,
-                            ordenEmpresaNombre = orden.OrdenEmpresaNombre,
-                            ordenFuncionarioId = orden.OrdenFuncionarioId,
-                            ordenFuncionarioNombre = orden.OrdenFuncionarioNombre,
-                            ordenFuncionarioApellido = orden.OrdenFuncionarioApellido
+                            ordenId = o.OrdenId,
+                            ordenNumero = o.OrdenNumero,
+                            ordenNombreOrganizacion = o.OrdenNombreOrganizacion,
+                            ordenMovil = o.OrdenMovil,
+                            ordenMatricula = o.OrdenMatricula,
+                            ordenEstado = o.OrdenEstado,
+                            ordenFechaInicioCoordinacion = o.OrdenFechaInicioCoordinacion,
+                            ordenFechaFinCoordinacion = o.OrdenFechaFinCoordinacion,
+                            ordenFechaFinalizacion = o.OrdenFechaFinalizacion,
+                            ordenUsuarioNombreFinalizo = o.OrdenUsuarioNombreFinalizo,
+                            ordenTmpoTrabajoEnMdeo = o.OrdenTmpoTrabajoEnMdeo,
+                            ordenTmpoTrabajoEnInterior = o.OrdenTmpoTrabajoEnInterior,
+                            ordenFechaPrimeraCarga = o.OrdenFechaPrimeraCarga,
+                            ordenSerieDpl = o.OrdenSerieDpl,
+                            ordenDeviceIdDpl = o.OrdenDeviceIdDpl,
+                            ordenSerieDataPass = o.OrdenSerieDataPass,
+                            ordenMacdataPass = o.OrdenMacdataPass,
+                            ordenSerieTagreader = o.OrdenSerieTagreader,
+                            ordenNroTagreader = o.OrdenNroTagreader,
+                            ordenChip = o.OrdenChip,
+                            ordenDivision = o.OrdenDivision,
+                            ordenFlota = o.OrdenFlota,
+                            ordenCardId = o.OrdenCardId,
+                            ordenBobina = o.OrdenBobina,
+                            ordenComentarioInicial = o.OrdenComentarioInicial,
+                            ordenTrazaOrden = o.OrdenTrazaOrden,
+                            ordenInstalaDpl = o.OrdenInstalaDpl,
+                            ordenInstalaDataPass = o.OrdenInstalaDataPass,
+                            ordenInstalaTagreader = o.OrdenInstalaTagreader,
+                            ordenInstalaInmovilizador = o.OrdenInstalaInmovilizador,
+                            ordenLugar = o.OrdenLugar,
+                            ordenZonaGira = o.OrdenZonaGira,
+                            ordenNroParte = o.OrdenNroParte,
+                            ordenCapacidadTanqueMim = o.OrdenCapacidadTanqueMim,
+                            ordenCapacidadTanqueMimtec = o.OrdenCapacidadTanqueMimtec,
+                            ordenInstalaCa = o.OrdenInstalaCa,
+                            ordenPudoInstalarCs = o.OrdenPudoInstalarCs,
+                            ordenInstalaMebiclick = o.OrdenInstalaMebiclick,
+                            ordenEncendidoPorMotor = o.OrdenEncendidoPorMotor,
+                            ordenComentarioFinales = o.OrdenComentarioFinales
                         };
                         ordenesLista.Add(ordenResponse);
                         await _context.SaveChangesAsync();

@@ -10,7 +10,6 @@ namespace Sisconve.Models
         public Empresa()
         {
             Funcionarios = new HashSet<Funcionario>();
-            Ordens = new HashSet<Orden>();
         }
 
         public int EmpresaId { get; set; }
@@ -20,6 +19,5 @@ namespace Sisconve.Models
         public int? EmpresaHorarioFin { get; set; }
 
         public virtual ICollection<Funcionario> Funcionarios { get; set; }
-        public virtual ICollection<Orden> Ordens { get; set; }
     }
 }
