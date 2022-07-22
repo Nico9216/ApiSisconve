@@ -45,5 +45,8 @@ namespace Sisconve.Models.Response
         public bool ordenInstalaMebiclick { get; set; }
         public bool ordenEncendidoPorMotor { get; set; }
         public string ordenComentarioFinales { get; set; }
+        public string ordenUsuarioAsigna { get; set; }
+        public string ordenEmpresaAsignadaNombre { get; set; }
+        public DateTime? ordenFechaAsignacion { get; set; }
     }
 }

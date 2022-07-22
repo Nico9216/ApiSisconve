@@ -232,5 +232,73 @@ namespace Sisconve.Persistencia
                 }
             }
         }
+
+        public async Task<List<ResponseOrden>> ListarOrdenesPorEmpresa(string fecha)
+        {
+            using (var _context = new SisconveContext())
+            {
+                try
+                {
+                    DateTime fechaIni = Convert.ToDateTime(fecha);
+                     List<ResponseOrden> ordenes = new List<ResponseOrden>();
+
+                        ordenes = await _context.Ordens.Where(o => o.OrdenFechaInicioCoordinacion == fechaIni ).Select(o => new ResponseOrden
+                        {
+                            ordenId = o.OrdenId,
+                            ordenNumero = o.OrdenNumero,
+                            ordenNombreOrganizacion = o.OrdenNombreOrganizacion,
+                            ordenMovil = o.OrdenMovil,
+                            ordenMatricula = o.OrdenMatricula,
+                            ordenEstado = o.OrdenEstado,
+                            ordenFechaInicioCoordinacion = o.OrdenFechaInicioCoordinacion,
+                            ordenFechaFinCoordinacion = o.OrdenFechaFinCoordinacion,
+                            ordenFechaFinalizacion = o.OrdenFechaFinalizacion,
+                            ordenUsuarioNombreFinalizo = o.OrdenUsuarioNombreFinalizo,
+                            ordenTmpoTrabajoEnMdeo = o.OrdenTmpoTrabajoEnMdeo,
+                            ordenTmpoTrabajoEnInterior = o.OrdenTmpoTrabajoEnInterior,
+                            ordenFechaPrimeraCarga = o.OrdenFechaPrimeraCarga,
+                            ordenSerieDpl = o.OrdenSerieDpl,
+                            ordenDeviceIdDpl = o.OrdenDeviceIdDpl,
+                            ordenSerieDataPass = o.OrdenSerieDataPass,
+                            ordenMacdataPass = o.OrdenMacdataPass,
+                            ordenSerieTagreader = o.OrdenSerieTagreader,
+                            ordenNroTagreader = o.OrdenNroTagreader,
+                            ordenChip = o.OrdenChip,
+                            ordenDivision = o.OrdenDivision,
+                            ordenFlota = o.OrdenFlota,
+                            ordenCardId = o.OrdenCardId,
+                            ordenBobina = o.OrdenBobina,
+                            ordenComentarioInicial = o.OrdenComentarioInicial,
+                            ordenTrazaOrden = o.OrdenTrazaOrden,
+                            ordenInstalaDpl = o.OrdenInstalaDpl,
+                            ordenInstalaDataPass = o.OrdenInstalaDataPass,
+                            ordenInstalaTagreader = o.OrdenInstalaTagreader,
+                            ordenInstalaInmovilizador = o.OrdenInstalaInmovilizador,
+                            ordenLugar = o.OrdenLugar,
+                            ordenDescripcion = o.OrdenDescripcion,
+                            ordenZonaGira = o.OrdenZonaGira,
+                            ordenNroParte = o.OrdenNroParte,
+                            ordenCapacidadTanqueMim = o.OrdenCapacidadTanqueMim,
+                            ordenCapacidadTanqueMimtec = o.OrdenCapacidadTanqueMimtec,
+                            ordenInstalaCa = o.OrdenInstalaCa,
+                            ordenPudoInstalarCs = o.OrdenPudoInstalarCs,
+                            ordenInstalaMebiclick = o.OrdenInstalaMebiclick,
+                            ordenEncendidoPorMotor = o.OrdenEncendidoPorMotor,
+                            ordenComentarioFinales = o.OrdenComentarioFinales,
+                            ordenUsuarioAsigna=o.OrdenUsuarioAsigna,
+                            ordenEmpresaAsignadaNombre=o.OrdenEmpresaAsignadaNombre,
+                            ordenFechaAsignacion=o.OrdenFechaAsignacion
+                        }).OrderBy(o=>o.ordenEmpresaAsignadaNombre).ToListAsync();
+                    
+
+
+                    return ordenes;
+                }
+                catch (Exception ex)
+                {
+                    throw new ApplicationException(ex.Message);
+                }
+            }
+        }
     }
 }

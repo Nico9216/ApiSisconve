@@ -12,8 +12,8 @@ GO
 CREATE DATABASE Sisconve
 ON(
 	name = Nada,
-	--filename = 'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\Sisconve.mdf'
-	filename = 'C:\Sisconve.mdf'
+	filename = 'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\Sisconve.mdf'
+	--filename = 'C:\Sisconve.mdf'
   )
 GO
 
@@ -22,7 +22,7 @@ GO
 
 --
 CREATE TABLE Usuario(
-	usuarioId INT IDENTITY(1,1),
+	usuarioId INT IDENTITY(1,1) PRIMARY KEY ,
 	usuarioCi VARCHAR (10) ,
 	usuarioNombres VARCHAR(50) NULL,
 	usuarioApellidos VARCHAR(50) NULL,
@@ -92,7 +92,12 @@ CREATE TABLE Orden(
  ordenPudoInstalarCS BIT NOT NULL,
  ordenInstalaMebiclick BIT NOT NULL,
  ordenEncendidoPorMotor BIT NOT NULL,
- ordenComentarioFinales VARCHAR(1000) NULL
+ ordenComentarioFinales VARCHAR(1000) NULL,
+ ordenUsuarioAsigna VARCHAR(10) NULL,
+ ordenEmpresaAsignadaNombre VARCHAR(50) NULL,
+ ordenFechaAsignacion DATETIME NULL,
+ ordenUsuarioACU INT FOREIGN KEY REFERENCES Usuario(usuarioId) NULL,
+ ordenEmpresa INT FOREIGN KEY REFERENCES Empresa(empresaId) NULL
 
 )
 

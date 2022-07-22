@@ -89,14 +89,14 @@ namespace Sisconve.Models
                 entity.HasOne(d => d.FuncionarioEmpresa)
                     .WithMany(p => p.Funcionarios)
                     .HasForeignKey(d => d.FuncionarioEmpresaId)
-                    .HasConstraintName("FK__Funcionar__funci__0AD2A005");
+                    .HasConstraintName("FK__Funcionar__funci__0DAF0CB0");
             });
 
             modelBuilder.Entity<Orden>(entity =>
             {
                 entity.ToTable("Orden");
 
-                entity.HasIndex(e => e.OrdenNumero, "UQ__Orden__A0C06A80108B795B")
+                entity.HasIndex(e => e.OrdenNumero, "UQ__Orden__A0C06A801367E606")
                     .IsUnique();
 
                 entity.Property(e => e.OrdenId).HasColumnName("ordenId");
@@ -136,6 +136,11 @@ namespace Sisconve.Models
                     .IsUnicode(false)
                     .HasColumnName("ordenComentarioInicial");
 
+                entity.Property(e => e.OrdenDescripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenDescripcion");
+
                 entity.Property(e => e.OrdenDeviceIdDpl)
                     .HasMaxLength(50)
                     .IsUnicode(false)
@@ -146,12 +151,23 @@ namespace Sisconve.Models
                     .IsUnicode(false)
                     .HasColumnName("ordenDivision");
 
+                entity.Property(e => e.OrdenEmpresa).HasColumnName("ordenEmpresa");
+
+                entity.Property(e => e.OrdenEmpresaAsignadaNombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenEmpresaAsignadaNombre");
+
                 entity.Property(e => e.OrdenEncendidoPorMotor).HasColumnName("ordenEncendidoPorMotor");
 
                 entity.Property(e => e.OrdenEstado)
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("ordenEstado");
+
+                entity.Property(e => e.OrdenFechaAsignacion)
+                    .HasColumnType("datetime")
+                    .HasColumnName("ordenFechaAsignacion");
 
                 entity.Property(e => e.OrdenFechaFinCoordinacion)
                     .HasColumnType("date")
@@ -255,6 +271,13 @@ namespace Sisconve.Models
                     .IsUnicode(false)
                     .HasColumnName("ordenTrazaOrden");
 
+                entity.Property(e => e.OrdenUsuarioAcu).HasColumnName("ordenUsuarioACU");
+
+                entity.Property(e => e.OrdenUsuarioAsigna)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("ordenUsuarioAsigna");
+
                 entity.Property(e => e.OrdenUsuarioNombreFinalizo)
                     .HasMaxLength(100)
                     .IsUnicode(false)
@@ -264,20 +287,26 @@ namespace Sisconve.Models
                     .HasMaxLength(20)
                     .IsUnicode(false)
                     .HasColumnName("ordenZonaGira");
-                entity.Property(e => e.OrdenDescripcion)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("ordenDescripcion");
+
+                entity.HasOne(d => d.OrdenEmpresaNavigation)
+                    .WithMany(p => p.Ordens)
+                    .HasForeignKey(d => d.OrdenEmpresa)
+                    .HasConstraintName("FK__Orden__ordenEmpr__164452B1");
+
+                entity.HasOne(d => d.OrdenUsuarioAcuNavigation)
+                    .WithMany(p => p.Ordens)
+                    .HasForeignKey(d => d.OrdenUsuarioAcu)
+                    .HasConstraintName("FK__Orden__ordenUsua__15502E78");
             });
 
             modelBuilder.Entity<Usuario>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("Usuario");
 
-                entity.HasIndex(e => e.UsuarioEmail, "UQ__Usuario__B8D449BD7F60ED59")
+                entity.HasIndex(e => e.UsuarioEmail, "UQ__Usuario__B8D449BD023D5A04")
                     .IsUnique();
+
+                entity.Property(e => e.UsuarioId).HasColumnName("usuarioId");
 
                 entity.Property(e => e.UsuarioApellidos)
                     .HasMaxLength(50)
@@ -296,10 +325,6 @@ namespace Sisconve.Models
                     .HasColumnName("usuarioEmail");
 
                 entity.Property(e => e.UsuarioEstado).HasColumnName("usuarioEstado");
-
-                entity.Property(e => e.UsuarioId)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("usuarioId");
 
                 entity.Property(e => e.UsuarioNombres)
                     .HasMaxLength(50)

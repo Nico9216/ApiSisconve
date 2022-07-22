@@ -11,5 +11,6 @@ namespace Sisconve.Persistencia.Interfaces
         Task<string> AgregarOrdenes(List<Orden> ordenes );
         Task<List<ResponseOrden>> ListarOrdenes(string tipo, string fechaDesde, string fechaHasta);
         Task<List<ResponseOrden>> AsignarOrdenes(List<int> ordenes, int idEMpresa);
+        Task<List<ResponseOrden>> ListarOrdenesPorEmpresa(string fecha);
     }
 }

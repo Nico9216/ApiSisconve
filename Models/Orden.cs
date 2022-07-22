@@ -48,5 +48,13 @@ namespace Sisconve.Models
         public bool OrdenInstalaMebiclick { get; set; }
         public bool OrdenEncendidoPorMotor { get; set; }
         public string OrdenComentarioFinales { get; set; }
+        public string OrdenUsuarioAsigna { get; set; }
+        public string OrdenEmpresaAsignadaNombre { get; set; }
+        public DateTime? OrdenFechaAsignacion { get; set; }
+        public int? OrdenUsuarioAcu { get; set; }
+        public int? OrdenEmpresa { get; set; }
+
+        public virtual Empresa OrdenEmpresaNavigation { get; set; }
+        public virtual Usuario OrdenUsuarioAcuNavigation { get; set; }
     }
 }

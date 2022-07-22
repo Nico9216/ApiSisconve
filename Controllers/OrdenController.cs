@@ -252,7 +252,6 @@ namespace Sisconve.Controllers
         }
 
         [HttpGet]
-
         public async Task<IActionResult> Get(string tipo, string fechaDesde, string fechaHasta)
         {
             try {
@@ -266,7 +265,24 @@ namespace Sisconve.Controllers
             }
 
         }
-       // [HttpPost("{ordenes}")]
+
+        [HttpGet("AsignadasPorDia")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Get(string fecha)
+        {
+            try
+            {
+
+                List<ResponseOrden> ordenes = await per.ListarOrdenesPorEmpresa(fecha);
+                return Ok(ordenes);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+        // [HttpPost("{ordenes}")]
 
         //public IActionResult Get(List<ResponseOrden> ordenes)
         //{
