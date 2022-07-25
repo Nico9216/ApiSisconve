@@ -47,6 +47,7 @@ namespace Sisconve.Models
                 entity.Property(e => e.EmpresaHorarioFin).HasColumnName("empresaHorarioFin");
 
                 entity.Property(e => e.EmpresaHorarioInicio).HasColumnName("empresaHorarioInicio");
+                entity.Property(e => e.EmpresaEstado).HasColumnName("empresaEstado");
 
                 entity.Property(e => e.EmpresaNombre)
                     .IsRequired()

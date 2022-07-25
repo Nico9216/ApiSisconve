@@ -267,7 +267,7 @@ namespace Sisconve.Controllers
         }
 
         [HttpGet("AsignadasPorDia")]
-        [AllowAnonymous]
+        
         public async Task<IActionResult> Get(string fecha)
         {
             try
@@ -281,6 +281,230 @@ namespace Sisconve.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
+
+        [HttpPost("FinalizarOrden")]
+        [AllowAnonymous]
+        [RequestFormLimits(ValueLengthLimit = 100_000_000, MultipartBodyLengthLimit = 100_000_000)]
+        public async Task<IActionResult> FinalizarOrden([FromForm] IFormFile files)
+        {
+            try
+            {
+                //El archivo viene en xls(formato antiguo de excel) el cual no lo puede leer XLWorkbook() por lo tanto
+                //lo convierto a xlsx con Apose.Cells
+                var fileName = files.FileName;
+                string ext = Path.GetExtension(fileName);
+                XLWorkbook workbook;
+                if (ext == ".xls")
+                {
+                    var workbook2 = new Workbook(files.OpenReadStream());
+                    workbook2.Save("reporteOrdenes.xlsx", SaveFormat.Xlsx);
+
+                    workbook = new XLWorkbook("reporteOrdenes.xlsx");
+                }
+                else if (ext == ".xlsx")
+                {
+                    workbook = new XLWorkbook(files.OpenReadStream());
+                }
+                else
+                {
+                    throw new Exception("Se permite unicamente archivos .xls y .xlsx");
+                }
+
+                var ws = workbook.Worksheet(1);
+                int row = 2;
+                bool finished = false;
+                List<Orden> ordenes = new List<Orden>();
+
+                while (finished == false)
+                {
+
+                    string ordenNumero = ws.Cell(row, 1).GetValue<string>();
+                    string ordenNombreOrganizacion = ws.Cell(row, 2).GetValue<string>();
+                    string ordenMovil = ws.Cell(row, 3).GetValue<string>();
+                    string ordenMatricula = ws.Cell(row, 4).GetValue<string>();
+                    string ordenEstado = ws.Cell(row, 5).GetValue<string>();
+                    string ordenFechaInicioCoordinacion = ws.Cell(row, 6).GetValue<string>();
+                    string ordenFechaFinCoordinacion = ws.Cell(row, 7).GetValue<string>();
+                    string ordenFechaFinalizacion = ws.Cell(row, 8).GetValue<string>();
+                    string ordenUsuarioNombreFinalizo = ws.Cell(row, 9).GetValue<string>();
+                    string ordenTmpoTrabajoEnMdeo = ws.Cell(row, 10).GetValue<string>();
+                    string ordenTmpoTrabajoEnInterior = ws.Cell(row, 11).GetValue<string>();
+                    string ordenFechaPrimeraCarga = ws.Cell(row, 12).GetValue<string>();
+                    string ordenSerieDpl = ws.Cell(row, 13).GetValue<string>();
+                    string ordenDeviceIdDpl = ws.Cell(row, 14).GetValue<string>();
+                    string ordenSerieDataPass = ws.Cell(row, 15).GetValue<string>();
+                    string ordenMacdataPass = ws.Cell(row, 16).GetValue<string>();
+                    string ordenSerieTagreader = ws.Cell(row, 17).GetValue<string>();
+                    string ordenNroTagreader = ws.Cell(row, 18).GetValue<string>();
+                    string ordenChip = ws.Cell(row, 19).GetValue<string>();
+                    string ordenDivision = ws.Cell(row, 20).GetValue<string>();
+                    string ordenFlota = ws.Cell(row, 21).GetValue<string>();
+                    string ordenCardId = ws.Cell(row, 22).GetValue<string>();
+                    string ordenBobina = ws.Cell(row, 23).GetValue<string>();
+                    string ordenComentarioInicial = ws.Cell(row, 24).GetValue<string>();
+                    string ordenTrazaOrden = ws.Cell(row, 25).GetValue<string>();
+                    string ordenInstalaDpl = ws.Cell(row, 26).GetValue<string>();
+                    string ordenInstalaDataPass = ws.Cell(row, 27).GetValue<string>();
+                    string ordenInstalaTagreader = ws.Cell(row, 28).GetValue<string>();
+                    string ordenInstalaInmovilizador = ws.Cell(row, 29).GetValue<string>();
+                    string ordenLugar = ws.Cell(row, 30).GetValue<string>();
+                    string ordenDescripcion = ws.Cell(row, 31).GetValue<string>();
+                    string ordenZonaGira = ws.Cell(row, 32).GetValue<string>();
+                    string ordenNroParte = ws.Cell(row, 33).GetValue<string>();
+                    string ordenCapacidadTanqueMim = ws.Cell(row, 34).GetValue<string>();
+                    string ordenCapacidadTanqueMimtec = ws.Cell(row, 35).GetValue<string>();
+                    string ordenInstalaCa = ws.Cell(row, 36).GetValue<string>();
+                    string ordenPudoInstalarCs = ws.Cell(row, 37).GetValue<string>();
+                    string ordenInstalaMebiclick = ws.Cell(row, 38).GetValue<string>();
+                    string ordenEncendidoPorMotor = ws.Cell(row, 39).GetValue<string>();
+
+
+
+
+                    if (ordenNumero != "")
+                    {
+                        Orden ordenObj = new Orden();
+                        ordenObj.OrdenNumero = Convert.ToInt64(ordenNumero);
+                        ordenObj.OrdenNombreOrganizacion = ordenNombreOrganizacion;
+                        ordenObj.OrdenMovil = ordenMovil;
+                        ordenObj.OrdenMatricula = ordenMatricula;
+                        ordenObj.OrdenEstado = ordenEstado;
+                        ordenObj.OrdenFechaInicioCoordinacion = Convert.ToDateTime(ordenFechaInicioCoordinacion);
+                        ordenObj.OrdenFechaFinCoordinacion = Convert.ToDateTime(ordenFechaFinCoordinacion);
+                        if (ordenFechaFinalizacion != "") { ordenObj.OrdenFechaFinalizacion = Convert.ToDateTime(ordenFechaFinalizacion); }
+
+                        ordenObj.OrdenUsuarioNombreFinalizo = ordenUsuarioNombreFinalizo;
+                        ordenObj.OrdenTmpoTrabajoEnMdeo = ordenTmpoTrabajoEnMdeo;
+                        ordenObj.OrdenTmpoTrabajoEnInterior = ordenTmpoTrabajoEnInterior;
+                        if (ordenFechaPrimeraCarga != "") { ordenObj.OrdenFechaPrimeraCarga = Convert.ToDateTime(ordenFechaPrimeraCarga); }
+                        ordenObj.OrdenSerieDpl = ordenSerieDpl;
+                        ordenObj.OrdenDeviceIdDpl = ordenDeviceIdDpl;
+                        ordenObj.OrdenSerieDataPass = ordenSerieDataPass;
+                        ordenObj.OrdenMacdataPass = ordenMacdataPass;
+                        ordenObj.OrdenSerieTagreader = ordenSerieTagreader;
+                        ordenObj.OrdenNroTagreader = ordenNroTagreader;
+                        ordenObj.OrdenChip = ordenChip;
+                        ordenObj.OrdenDivision = ordenDivision;
+                        ordenObj.OrdenFlota = ordenFlota;
+                        ordenObj.OrdenCardId = ordenCardId;
+                        ordenObj.OrdenBobina = ordenBobina;
+                        ordenObj.OrdenComentarioInicial = ordenComentarioInicial;
+                        ordenObj.OrdenTrazaOrden = ordenTrazaOrden;
+                        if (ordenInstalaDpl == "Sí")
+                        {
+                            ordenObj.OrdenInstalaDpl = true;
+                        }
+                        else
+                        {
+                            ordenObj.OrdenInstalaDpl = false;
+                        }
+
+                        if (ordenInstalaDataPass == "Sí")
+                        {
+                            ordenObj.OrdenInstalaDataPass = true;
+                        }
+                        else
+                        {
+                            ordenObj.OrdenInstalaDataPass = false;
+                        }
+
+                        if (ordenInstalaTagreader == "Sí")
+                        {
+                            ordenObj.OrdenInstalaTagreader = true;
+                        }
+                        else
+                        {
+                            ordenObj.OrdenInstalaTagreader = false;
+                        }
+
+                        if (ordenInstalaInmovilizador == "Sí")
+                        {
+                            ordenObj.OrdenInstalaInmovilizador = true;
+                        }
+                        else
+                        {
+                            ordenObj.OrdenInstalaInmovilizador = false;
+                        }
+
+
+
+                        ordenObj.OrdenLugar = ordenLugar;
+                        ordenObj.OrdenDescripcion = ordenDescripcion;
+                        ordenObj.OrdenZonaGira = ordenZonaGira;
+                        ordenObj.OrdenNroParte = ordenNroParte;
+                        ordenObj.OrdenCapacidadTanqueMim = ordenCapacidadTanqueMim;
+                        ordenObj.OrdenCapacidadTanqueMimtec = ordenCapacidadTanqueMimtec;
+
+                        if (ordenInstalaCa == "Sí")
+                        {
+                            ordenObj.OrdenInstalaCa = true;
+                        }
+                        else
+                        {
+                            ordenObj.OrdenInstalaCa = false;
+                        }
+
+                        if (ordenPudoInstalarCs == "Sí")
+                        {
+                            ordenObj.OrdenPudoInstalarCs = true;
+                        }
+                        else
+                        {
+                            ordenObj.OrdenPudoInstalarCs = false;
+                        }
+
+                        if (ordenInstalaMebiclick == "Sí")
+                        {
+                            ordenObj.OrdenInstalaMebiclick = true;
+                        }
+                        else
+                        {
+                            ordenObj.OrdenInstalaMebiclick = false;
+                        }
+
+                        if (ordenEncendidoPorMotor == "Sí")
+                        {
+                            ordenObj.OrdenEncendidoPorMotor = true;
+                        }
+                        else
+                        {
+                            ordenObj.OrdenEncendidoPorMotor = false;
+                        }
+
+
+
+                        //ordenObj.OrdenNumero = Convert.ToInt64(orden);
+                        //ordenObj.OrdenFechaIngreso = Convert.ToDateTime(fechaIngreso);
+                        //ordenObj.OrdenUsuarioNombre = usuarioIngreso;
+                        //ordenObj.OrdenFechaInicioCoordinacion = Convert.ToDateTime(fechaCordInicio);
+                        //ordenObj.OrdenFechaFinCoordinacion = Convert.ToDateTime(fechaCordFin);
+                        //if (fechaFinalización != "")
+                        //{
+                        //    ordenObj.OrdenFechaFinalizacion = Convert.ToDateTime(fechaFinalización);
+                        //}
+                        //ordenObj.OrdenMovil = movil;
+                        //ordenObj.OrdenLugar = lugar;
+                        //ordenObj.OrdenEstado = estado;
+                        //ordenObj.OrdenComentario = comentarios;
+
+                        ordenes.Add(ordenObj);
+                        row++;
+                    }
+                    else { finished = true; }
+                }
+
+                string resp = await per.FinalizarOrdenes(ordenes);
+
+
+                return Ok();
+
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         // [HttpPost("{ordenes}")]
 

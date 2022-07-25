@@ -23,6 +23,10 @@ namespace Sisconve.Persistencia
                     {
                         foreach (Orden orden in ordenes)
                         {
+                            if(orden.OrdenEstado !="Para asignar")
+                            {
+                                throw new Exception("El archivo seleccionado contiene ordenes con estado diferente de A asignar");
+                            }
                             Orden ordenExiste = await _context.Ordens.Where(x => x.OrdenNumero == orden.OrdenNumero).FirstOrDefaultAsync();
                             if(ordenExiste != null)
                             {
@@ -105,7 +109,7 @@ namespace Sisconve.Persistencia
                     else
                     {
                         //&& o.OrdenFechaIngreso >= fechaIni && o.OrdenFechaIngreso <= fechaFin
-                        ordenes = await _context.Ordens.Where(o => o.OrdenEstado == tipo ).Select(o => new ResponseOrden
+                        ordenes = await _context.Ordens.Where(o => o.OrdenEstado == tipo && o.OrdenFechaInicioCoordinacion >=fechaIni && o.OrdenFechaInicioCoordinacion <= fechaFin).Select(o => new ResponseOrden
                         {
                             ordenId = o.OrdenId,
                             ordenNumero = o.OrdenNumero,
@@ -299,6 +303,83 @@ namespace Sisconve.Persistencia
                     throw new ApplicationException(ex.Message);
                 }
             }
+        }
+
+        public async Task<string> FinalizarOrdenes(List<Orden> ordenes)
+        {
+            using (var _context = new SisconveContext())
+            {
+
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        foreach (Orden o in ordenes)
+                        {
+                            if (o.OrdenEstado != "Ejecutado")
+                            {
+                                throw new Exception("El archivo seleccionado contiene ordenes con estado diferente de Ejecutado");
+                            }
+                            Orden ordenExiste = await _context.Ordens.Where(x => x.OrdenNumero == o.OrdenNumero).FirstOrDefaultAsync();
+                            if (ordenExiste is null)
+                            {
+                                throw new Exception("No existe una orden con el número " + o.OrdenNumero.ToString());
+                            }
+                           
+                            ordenExiste.OrdenNombreOrganizacion = o.OrdenNombreOrganizacion;
+                            ordenExiste.OrdenMovil = o.OrdenMovil;
+                            ordenExiste.OrdenMatricula = o.OrdenMatricula;
+                            ordenExiste.OrdenEstado = o.OrdenEstado;
+                            ordenExiste.OrdenFechaInicioCoordinacion = o.OrdenFechaInicioCoordinacion;
+                            ordenExiste.OrdenFechaFinCoordinacion = o.OrdenFechaFinCoordinacion;
+                            ordenExiste.OrdenFechaFinalizacion = o.OrdenFechaFinalizacion;
+                            ordenExiste.OrdenUsuarioNombreFinalizo = o.OrdenUsuarioNombreFinalizo;
+                            ordenExiste.OrdenTmpoTrabajoEnMdeo = o.OrdenTmpoTrabajoEnMdeo;
+                            ordenExiste.OrdenTmpoTrabajoEnInterior = o.OrdenTmpoTrabajoEnInterior;
+                            ordenExiste.OrdenFechaPrimeraCarga = o.OrdenFechaPrimeraCarga;
+                            ordenExiste.OrdenSerieDpl = o.OrdenSerieDpl;
+                            ordenExiste.OrdenDeviceIdDpl = o.OrdenDeviceIdDpl;
+                            ordenExiste.OrdenSerieDataPass = o.OrdenSerieDataPass;
+                            ordenExiste.OrdenMacdataPass = o.OrdenMacdataPass;
+                            ordenExiste.OrdenSerieTagreader = o.OrdenSerieTagreader;
+                            ordenExiste.OrdenNroTagreader = o.OrdenNroTagreader;
+                            ordenExiste.OrdenChip = o.OrdenChip;
+                            ordenExiste.OrdenDivision = o.OrdenDivision;
+                            ordenExiste.OrdenFlota = o.OrdenFlota;
+                            ordenExiste.OrdenCardId = o.OrdenCardId;
+                            ordenExiste.OrdenBobina = o.OrdenBobina;
+                            ordenExiste.OrdenComentarioInicial = o.OrdenComentarioInicial;
+                            ordenExiste.OrdenTrazaOrden = o.OrdenTrazaOrden;
+                            ordenExiste.OrdenInstalaDpl = o.OrdenInstalaDpl;
+                            ordenExiste.OrdenInstalaDataPass = o.OrdenInstalaDataPass;
+                            ordenExiste.OrdenInstalaTagreader = o.OrdenInstalaTagreader;
+                            ordenExiste.OrdenInstalaInmovilizador = o.OrdenInstalaInmovilizador;
+                            ordenExiste.OrdenLugar = o.OrdenLugar;
+                            ordenExiste.OrdenDescripcion = o.OrdenDescripcion;
+                            ordenExiste.OrdenZonaGira = o.OrdenZonaGira;
+                            ordenExiste.OrdenNroParte = o.OrdenNroParte;
+                            ordenExiste.OrdenCapacidadTanqueMim = o.OrdenCapacidadTanqueMim;
+                            ordenExiste.OrdenCapacidadTanqueMimtec = o.OrdenCapacidadTanqueMimtec;
+                            ordenExiste.OrdenInstalaCa = o.OrdenInstalaCa;
+                            ordenExiste.OrdenPudoInstalarCs = o.OrdenPudoInstalarCs;
+                            ordenExiste.OrdenInstalaMebiclick = o.OrdenInstalaMebiclick;
+                            ordenExiste.OrdenEncendidoPorMotor = o.OrdenEncendidoPorMotor;
+                            ordenExiste.OrdenComentarioFinales = o.OrdenComentarioFinales;
+                           await _context.SaveChangesAsync();
+                        }
+
+                        transaction.Commit();
+                        return "Ok";
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw new ApplicationException(ex.Message);
+
+                    }
+                }
+            }
+
         }
     }
 }

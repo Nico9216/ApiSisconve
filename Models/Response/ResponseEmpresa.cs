@@ -7,6 +7,7 @@
         public int? empresaCantEmpleados { get; set; }
         public int? empresaHorarioInicio { get; set; }
         public int? empresaHorarioFin { get; set; }
+        public bool? empresaEstado { get; set; }
 
     }
 }

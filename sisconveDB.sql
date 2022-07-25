@@ -12,8 +12,8 @@ GO
 CREATE DATABASE Sisconve
 ON(
 	name = Nada,
-	--filename = 'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\Sisconve.mdf'
-	filename = 'C:\Sisconve.mdf'
+	filename = 'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\Sisconve.mdf'
+	--filename = 'C:\Sisconve.mdf'
   )
 GO
 
@@ -39,6 +39,7 @@ CREATE TABLE Empresa(
 	empresaCantEmpleados INT NULL,
 	empresaHorarioInicio INT NULL,
 	empresaHorarioFin INT NULL,
+	empresaEstado BIT DEFAULT(0) NOT NULL
 )
 
 CREATE TABLE Funcionario(
@@ -103,9 +104,26 @@ CREATE TABLE Orden(
 
 )
 
+CREATE TABLE [dbo].[ARTICULOS](
+	[ArtCod] [char](7) NOT NULL,
+	[ArtNom] [char](50) NULL,
+	[TipCod] [char](4) NULL,
+	[TipNom] [char](40) NULL,
+	[ArtStk] [money] NULL,
+	[ArtCanCom] [money] NULL,
+	[ArtAct] [char](1) NULL,
+	[ArtFchIns] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ArtCod] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 
 
 INSERT INTO Usuario VALUES('49260752','Nicolás','Barreto','nbarreto@acu.com.uy','1234',0)
-INSERT INTO Empresa VALUES('ACU',5,800,1800)
-INSERT INTO Empresa VALUES('ACUTEST',8,1000,1800)
+INSERT INTO Empresa VALUES('ACU',5,800,1800,0)
+INSERT INTO Empresa VALUES('ACUTEST',8,1000,1800,0)
 select * from Orden
+DELETE Orden
+select * from Empresa

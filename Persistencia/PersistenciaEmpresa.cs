@@ -53,6 +53,7 @@ namespace Sisconve.Persistencia
                     empresaContext.EmpresaCantEmpleados = empresa.empresaCantEmpleados;
                     empresaContext.EmpresaHorarioInicio = empresa.empresaHorarioInicio;
                     empresaContext.EmpresaHorarioFin = empresa.empresaHorarioFin;
+                    empresaContext.EmpresaEstado = false;
 
                     _context.Empresas.Add(empresaContext);
                     await _context.SaveChangesAsync();
