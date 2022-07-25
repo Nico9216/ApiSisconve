@@ -185,11 +185,17 @@ namespace Sisconve.Models
                     .HasColumnType("date")
                     .HasColumnName("ordenFechaPrimeraCarga");
 
+                entity.Property(e => e.OrdenFechaInicioServicio)
+                    .HasColumnType("date")
+                    .HasColumnName("ordenFechaInicioServicio");
+
                 entity.Property(e => e.OrdenFlota)
                     .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasColumnName("ordenFlota");
 
+                entity.Property(e => e.OrdenHoraInicioServicio).HasColumnName("ordenHoraInicioServicio");
+                
                 entity.Property(e => e.OrdenInstalaCa).HasColumnName("ordenInstalaCA");
 
                 entity.Property(e => e.OrdenInstalaDataPass).HasColumnName("ordenInstalaDataPass");

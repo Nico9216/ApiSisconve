@@ -48,5 +48,7 @@ namespace Sisconve.Models.Response
         public string ordenUsuarioAsigna { get; set; }
         public string ordenEmpresaAsignadaNombre { get; set; }
         public DateTime? ordenFechaAsignacion { get; set; }
+        public DateTime? ordenFechaInicioServicio { get; set; }
+        public int? ordenHoraInicioServicio { get; set; }
     }
 }

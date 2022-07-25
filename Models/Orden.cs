@@ -51,6 +51,8 @@ namespace Sisconve.Models
         public string OrdenUsuarioAsigna { get; set; }
         public string OrdenEmpresaAsignadaNombre { get; set; }
         public DateTime? OrdenFechaAsignacion { get; set; }
+        public DateTime? OrdenFechaInicioServicio { get; set; }
+        public int? OrdenHoraInicioServicio { get; set; }
         public int? OrdenUsuarioAcu { get; set; }
         public int? OrdenEmpresa { get; set; }
 
